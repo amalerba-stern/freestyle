@@ -28,4 +28,13 @@ input_dict = dict({"item":input_item, "category":input_category,
 
 my_spend.append(input_dict)
 
-print(my_spend)
+# Create pandas DataFrame from the input data
+# https://www.geeksforgeeks.org/different-ways-to-create-pandas-dataframe/
+items = [purchase["item"] for purchase in my_spend]
+categories = [purchase["category"] for purchase in my_spend]
+prices = [purchase["price"] for purchase in my_spend]
+dates = [purchase["date"] for purchase in my_spend]
+
+data = pandas.DataFrame({'Item': items, 'Category': categories,
+                         'Price': prices, 'Date': dates})
+
