@@ -14,7 +14,11 @@ def to_usd(my_price):
     return f"${my_price:,.2f}" #> $12,000.71
 
 my_spend = [
-    {"item":"banana", "category":"food", "price": 1.99, "date": "May 2020"}
+    {"item":"banana", "category":"food", "price": 1.99, "date": "May 2020"},
+    {"item":"rent", "category":"housing", "price": 1200, "date": "March 2020"},
+    {"item":"rent", "category":"housing", "price": 1200, "date": "April 2020"},
+    {"item":"rent", "category":"housing", "price": 1250, "date": "May 2020"},
+    {"item":"dinner", "category":"food", "price": 19, "date": "May 2020"}
 ]
 
 # Input items
@@ -35,6 +39,13 @@ categories = [purchase["category"] for purchase in my_spend]
 prices = [purchase["price"] for purchase in my_spend]
 dates = [purchase["date"] for purchase in my_spend]
 
-data = pandas.DataFrame({'Item': items, 'Category': categories,
-                         'Price': prices, 'Date': dates})
+data = pandas.DataFrame({"Item": items, "Category": categories,
+                         "Price": prices, "Date": dates})
 
+# Generate summary statistics
+
+data_by_category = data.groupby("Category").sum().sort_values(by=["Price"], ascending=False)
+print(data_by_category)
+print("------------")
+data_by_date = data.groupby("Date").sum().sort_values(by=["Price"], ascending=False)
+print(data_by_date)
