@@ -5,6 +5,7 @@ import os
 import pandas
 import plotly
 import plotly.graph_objs as go
+from plotly.graph_objs.scatter.marker import Line
 
 def to_usd(my_price):
     """
@@ -17,20 +18,23 @@ def to_usd(my_price):
 
 # sample input data (want user to input this)
 my_spend = [
-    {"item":"banana", "category":"food", "price": 1.99, "month": 1},
-    {"item":"rent", "category":"housing", "price": 1200, "month": 1},
-    {"item":"rent", "category":"housing", "price": 1200, "month": 2},
-    {"item":"rent", "category":"housing", "price": 1200, "month": 3},
-    {"item":"rent", "category":"housing", "price": 1200, "month": 4},
-    {"item":"rent", "category":"housing", "price": 1250, "month": 5},
-    {"item":"rent", "category":"housing", "price": 1250, "month": 6},
-    {"item":"rent", "category":"housing", "price": 1250, "month": 7},
-    {"item":"rent", "category":"housing", "price": 1250, "month": 8},
-    {"item":"rent", "category":"housing", "price": 1250, "month": 9},
-    {"item":"rent", "category":"housing", "price": 1250, "month": 10},
-    {"item":"rent", "category":"housing", "price": 1250, "month": 11},
-    {"item":"rent", "category":"housing", "price": 1250, "month": 12},
-    {"item":"dinner", "category":"food", "price": 19, "month": 5}
+    {"item":"groceries", "category":"food", "price": 78.94, "month": 1},
+    {"item":"rent", "category":"housing", "price": 1000, "month": 1},
+    #{"item":"rent", "category":"housing", "price": 1000, "month": 2},
+    #{"item":"rent", "category":"housing", "price": 1000, "month": 3},
+    #{"item":"rent", "category":"housing", "price": 1000, "month": 4},
+    #{"item":"rent", "category":"housing", "price": 1000, "month": 5},
+    #{"item":"rent", "category":"housing", "price": 1050, "month": 6},
+    #{"item":"rent", "category":"housing", "price": 1050, "month": 7},
+    #{"item":"rent", "category":"housing", "price": 1050, "month": 8},
+    #{"item":"rent", "category":"housing", "price": 1050, "month": 9},
+    #{"item":"rent", "category":"housing", "price": 1050, "month": 10},
+    #{"item":"rent", "category":"housing", "price": 1050, "month": 11},
+    #{"item":"rent", "category":"housing", "price": 1050, "month": 12},
+    {"item":"metrocard", "category":"transportation", "price": 150, "month": 1},
+    {"item":"massage", "category":"personal", "price": 100, "month": 1},
+    {"item":"birthday gift", "category":"other", "price": 40, "month": 1},
+    {"item":"dinner", "category":"food", "price": 50, "month": 1}
 ]
 '''
 # Input items
@@ -57,6 +61,8 @@ data = pandas.DataFrame({"Item": items, "Category": categories,
 # Generate summary statistics
 
 data_by_category = data.groupby("Category").sum().sort_values(by=["Price"], ascending=False)
+total = sum(data_by_category["Price"])
+print("Total spend:", total)
 print(data_by_category)
 print("------------")
 data_by_date = data.groupby("Month").sum().sort_values(by=["Month"], ascending=True)
@@ -64,10 +70,12 @@ print(data_by_date)
 
 # Generate summary graphs & plots
 
+# Line graph showing spend over time
+
 y = list(data_by_date["Price"])
 x = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Oct", "Nov", "Dec"]
 
-line = go.Line(x = x, y = y)
+line = go.Scatter(x = x, y = y)
 
 layout = go.Layout(title = f"Spending by Month",
                    xaxis = dict({"title" : "Month"}),
@@ -78,3 +86,30 @@ plotly.offline.plot({"data": line,
                      "layout": layout},
                     filename = "monthly_sales_over_time.html",
                     auto_open = True)
+
+# Pie chart showing spend by category
+
+spend_housing = data_by_category["Price"].loc["housing"]/total
+spend_food = data_by_category["Price"].loc["food"]/total
+spend_personal = data_by_category["Price"].loc["personal"]/total
+spend_transportation = data_by_category["Price"].loc["transportation"]/total
+spend_other = data_by_category["Price"].loc["other"]/total
+
+pie_data = [
+    {"category": "Housing", "spend_pct": spend_housing},
+    {"category": "Food", "spend_pct": spend_food},
+    {"category": "Personal", "spend_pct": spend_personal},
+    {"category": "Transportation", "spend_pct": spend_transportation},
+    {"category": "Other", "spend_pct": spend_other}
+]
+
+print("----------------")
+print("GENERATING PIE CHART...")
+print(pie_data) # TODO: create a pie chart based on the pie_data
+
+labels = [pie_data["category"] for pie_data in pie_data]
+values = [pie_data["spend_pct"] for pie_data in pie_data]
+
+trace = go.Pie(labels=labels, values=values,
+               hoverinfo="")
+plotly.offline.plot([trace], filename="pie_chart.html", auto_open=True)
