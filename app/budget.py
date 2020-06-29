@@ -110,6 +110,5 @@ print(pie_data) # TODO: create a pie chart based on the pie_data
 labels = [pie_data["category"] for pie_data in pie_data]
 values = [pie_data["spend_pct"] for pie_data in pie_data]
 
-trace = go.Pie(labels=labels, values=values,
-               hoverinfo="")
+trace = go.Pie(labels=labels, values=values)
 plotly.offline.plot([trace], filename="pie_chart.html", auto_open=True)
