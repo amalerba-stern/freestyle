@@ -1,0 +1,12 @@
+{% extends "bootstrap_layout.html" %}
+{% set active_page = "budget_table" %}
+
+{% block content %}
+
+    <h1>Your Spending</h1>
+
+    {% for table in tables %}
+        {{tables | safe}}
+    {% endfor %}
+
+{% endblock %}
