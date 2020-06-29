@@ -3,12 +3,15 @@
 
 {% block content %}
 
-    <p>We have received your inputs of:</p>
+    <h3>We have received your inputs of:</h3>
     <ul>
         <li><b>Item:</b> {{ item }}</n></li>
         <li><b>Category:</b> {{ category }}</n></li>
         <li><b>Price:</b> ${{ price }}</n></li>
         <li><b>Month:</b> {{ month }}</n></li>
     </ul>
+
+    <h3>Do you have another spend item to add?</h3>
+    <a href="/budget/form">Click here</a>
 
 {% endblock %}
