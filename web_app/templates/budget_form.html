@@ -5,135 +5,10 @@
 
     <h2>Budget Form</h2>
 
-    <!-- clear inputs option -->
-
     <p>Enter your spending here:</p>
 
     <form action="/budget/input-received" method="POST">
 
-        <style>
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-            }
-
-            td, th {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-            }
-
-            tr:nth-child(even) {
-            background-color: #dddddd;
-            }
-        </style>
-
-        <table>
-            <tr>
-                <th>Month</th>
-                <th>Food</th>
-                <th>Housing</th>
-                <th>Personal</th>
-                <th>Transportation</th>
-                <th>Other</th>
-            </tr>
-            <tr>
-                <td>January</td>
-                <td><input type="number" name="cost_jan_f" step="0.01"></td>
-                <td><input type="number" name="cost_jan_h" step="0.01"></td>
-                <td><input type="number" name="cost_jan_p" step="0.01"></td>
-                <td><input type="number" name="cost_jan_t" step="0.01"></td>
-                <td><input type="number" name="cost_jan_o" step="0.01"></td>
-            </tr>
-            <tr>
-                <td>February</td>
-                <td><input type="number" name="cost_feb_f" step="0.01"></td>
-                <td><input type="number" name="cost_feb_h" step="0.01"></td>
-                <td><input type="number" name="cost_feb_p" step="0.01"></td>
-                <td><input type="number" name="cost_feb_t" step="0.01"></td>
-                <td><input type="number" name="cost_feb_o" step="0.01"></td>
-            </tr>
-            <tr>
-                <td>March</td>
-                <td><input type="number" name="cost_mar_f" step="0.01"></td>
-                <td><input type="number" name="cost_mar_h" step="0.01"></td>
-                <td><input type="number" name="cost_mar_p" step="0.01"></td>
-                <td><input type="number" name="cost_mar_t" step="0.01"></td>
-                <td><input type="number" name="cost_mar_o" step="0.01"></td>
-            </tr>
-            <tr>
-                <td>April</td>
-                <td><input type="number" name="cost_apr_f" step="0.01"></td>
-                <td><input type="number" name="cost_apr_h" step="0.01"></td>
-                <td><input type="number" name="cost_apr_p" step="0.01"></td>
-                <td><input type="number" name="cost_apr_t" step="0.01"></td>
-                <td><input type="number" name="cost_apr_o" step="0.01"></td>
-            </tr>            <tr>
-                <td>May</td>
-                <td><input type="number" name="cost_may_f" step="0.01"></td>
-                <td><input type="number" name="cost_may_h" step="0.01"></td>
-                <td><input type="number" name="cost_may_p" step="0.01"></td>
-                <td><input type="number" name="cost_may_t" step="0.01"></td>
-                <td><input type="number" name="cost_may_o" step="0.01"></td>
-            </tr>
-            <tr>
-                <td>June</td>
-                <td><input type="number" name="cost_jun_f" step="0.01"></td>
-                <td><input type="number" name="cost_jun_h" step="0.01"></td>
-                <td><input type="number" name="cost_jun_p" step="0.01"></td>
-                <td><input type="number" name="cost_jun_t" step="0.01"></td>
-                <td><input type="number" name="cost_jun_o" step="0.01"></td>
-            </tr>
-            <tr>
-                <td>July</td>
-                <td><input type="number" name="cost_jul_f" step="0.01"></td>
-                <td><input type="number" name="cost_jul_h" step="0.01"></td>
-                <td><input type="number" name="cost_jul_p" step="0.01"></td>
-                <td><input type="number" name="cost_jul_t" step="0.01"></td>
-                <td><input type="number" name="cost_jul_o" step="0.01"></td>
-            </tr>
-            <tr>
-                <td>August</td>
-                <td><input type="number" name="cost_aug_f" step="0.01"></td>
-                <td><input type="number" name="cost_aug_h" step="0.01"></td>
-                <td><input type="number" name="cost_aug_p" step="0.01"></td>
-                <td><input type="number" name="cost_aug_t" step="0.01"></td>
-                <td><input type="number" name="cost_aug_o" step="0.01"></td>
-            </tr>            <tr>
-                <td>September</td>
-                <td><input type="number" name="cost_sep_f" step="0.01"></td>
-                <td><input type="number" name="cost_sep_h" step="0.01"></td>
-                <td><input type="number" name="cost_sep_p" step="0.01"></td>
-                <td><input type="number" name="cost_sep_t" step="0.01"></td>
-                <td><input type="number" name="cost_sep_o" step="0.01"></td>
-            </tr>
-            <tr>
-                <td>October</td>
-                <td><input type="number" name="cost_oct_f" step="0.01"></td>
-                <td><input type="number" name="cost_oct_h" step="0.01"></td>
-                <td><input type="number" name="cost_oct_p" step="0.01"></td>
-                <td><input type="number" name="cost_oct_t" step="0.01"></td>
-                <td><input type="number" name="cost_oct_o" step="0.01"></td>
-            </tr>
-            <tr>
-                <td>November</td>
-                <td><input type="number" name="cost_nov_f" step="0.01"></td>
-                <td><input type="number" name="cost_nov_h" step="0.01"></td>
-                <td><input type="number" name="cost_nov_p" step="0.01"></td>
-                <td><input type="number" name="cost_nov_t" step="0.01"></td>
-                <td><input type="number" name="cost_nov_o" step="0.01"></td>
-            </tr>
-            <tr>
-                <td>December</td>
-                <td><input type="number" name="cost_dec_f" step="0.01"></td>
-                <td><input type="number" name="cost_dec_h" step="0.01"></td>
-                <td><input type="number" name="cost_dec_p" step="0.01"></td>
-                <td><input type="number" name="cost_dec_t" step="0.01"></td>
-                <td><input type="number" name="cost_dec_o" step="0.01"></td>
-            </tr>
-        </table>
-        <!--
         <label>Item:</label>
         <input type="text" name="item">
         <br>
@@ -147,11 +22,10 @@
             <option value="other">Other</option>
         </select>
         <br>
-        -->
-        <!-- https://www.w3schools.com/html/tryit.asp?filename=tryhtml_table_intro -->
+        
         <!-- https://www.w3schools.com/html/html_form_elements.asp -->
         <!-- https://stackoverflow.com/questions/14650932/set-value-to-currency-in-input-type-number -->
-        <!--
+
         <label>Price:</label>
         <span>$</span>
         <input type="number" name="price" min-"0.01" step="0.01">
@@ -173,7 +47,7 @@
             <option value="dec">December</option>
         </select>
         <br>     
-        -->   
+           
         <button>Submit</button>
     </form>
 
