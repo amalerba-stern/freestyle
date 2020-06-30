@@ -19,47 +19,75 @@ def to_usd(my_price):
 # https://www.geeksforgeeks.org/different-ways-to-create-pandas-dataframe/
 while True:
     input_method = input("What is your input method? ('csv' or 'manual'):")
-    print("1")
     if input_method == "csv":
         data = pandas.read_csv("budget.csv", engine='python')
-        data["price"] = [int(p) for p in data["price"]]
+        data["price"] = [float(p) for p in data["price"]]
         break
     elif input_method == "manual":
         my_spend = []
         done = "No"
         while done == "No":
+            # item
             input_item = input("Input your item:")
+
+            # category
             input_category = input("Input the category:")
-            input_price = input("Input the price:")
-            input_month = input("Input the month (as a number):")
+            if input_category not in ["housing", "food", "transportation", "personal"]:
+                input_category = "other"
+
+            # price
+            while True:
+                input_price = input("Input the price:")
+                try:
+                    if float(input_price) > 0:
+                        break
+                    else:
+                        print("Invalid input. Price must be numbers greater than 0.")
+                except:
+                    print("Invalid input. Price must be numbers greater than 0.")
+            # month
+            while True:
+                input_month = input("Input the month (as a number):")
+                try:
+                    if (int(input_month) >=1 and int(input_month) <=12):
+                        break
+                    else:
+                        print("Invalid input. Month must be between 1 and 12, inclusive.")
+                except:
+                    print("Month must be between 1 and 12, inclusive.")
             input_done = input("Are you done entering your spending? ('Yes' or 'No'):")
             input_dict = dict({"item":input_item, "category":input_category, 
-                            "price": int(input_price), "month":input_month})
+                            "price": float(input_price), "month":input_month})
             my_spend.append(input_dict)
             if input_done == "Yes":
                 done = "Yes"
                 break
         items = [purchase["item"] for purchase in my_spend]
         categories = [purchase["category"] for purchase in my_spend]
-        prices = [int(purchase["price"]) for purchase in my_spend]
+        prices = [float(purchase["price"]) for purchase in my_spend]
         months = [purchase["month"] for purchase in my_spend]
 
         data = pandas.DataFrame({"item": items, "category": categories,
                                 "price": prices, "month": months})
+        if done == "Yes": # need additional check to break out of outer loop
+            break
     else:
         print("Invalid entry. You must select either 'csv' or 'manual.")
 
-# Generate summary statistics
+## Generate summary graphs & plots
 
 data_by_category = data.groupby("category").sum().sort_values(by=["price"], ascending=False)
 total = sum(data_by_category["price"])
 
 data_by_date = data.groupby("month").sum().sort_values(by=["month"], ascending=True)
 
-# Generate summary graphs & plots
+# Line graph over time
 
 y = list(data_by_date["price"])
 x = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Oct", "Nov", "Dec"]
+
+print("----------------")
+print("GENERATING LINE GRAPH...")
 
 line = go.Scatter(x = x, y = y)
 
@@ -74,7 +102,6 @@ plotly.offline.plot({"data": line,
                     auto_open = True)
 
 # Pie chart showing spend by category
-
 # Use exceptions in case there are no items in that category
 try:
     spend_housing = data_by_category["price"].loc["housing"]/total
@@ -111,7 +138,6 @@ pie_data = [
 
 print("----------------")
 print("GENERATING PIE CHART...")
-print(pie_data) # TODO: create a pie chart based on the pie_data
 
 labels = [pie_data["category"] for pie_data in pie_data]
 values = [pie_data["spend_pct"] for pie_data in pie_data]
