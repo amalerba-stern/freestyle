@@ -1,0 +1,43 @@
+item,category,price,month
+groceries,food,200,1
+groceries,food,212,2
+groceries,food,209,3
+groceries,food,210,4
+groceries,food,205,5
+groceries,food,200,6
+groceries,food,201,7
+groceries,food,200,8
+groceries,food,205,9
+groceries,food,198,10
+groceries,food,240,11
+groceries,food,230,12
+dinner,food, 40,5
+rent,housing, 1200,1
+rent,housing, 1200,2
+rent,housing, 1200,3
+rent,housing, 1200,4
+rent,housing, 1250,5
+rent,housing, 1250,6
+rent,housing, 1250,7
+rent,housing, 1250,8
+rent,housing, 1250,9
+rent,housing, 1250,10
+rent,housing, 1250,11
+rent,housing, 1250,12
+metrocard,transportation,140,5
+metrocard,transportation,140,5
+metrocard,transportation,140,5
+metrocard,transportation,140,5
+metrocard,transportation,140,5
+metrocard,transportation,140,5
+metrocard,transportation,140,5
+metrocard,transportation,140,5
+metrocard,transportation,140,5
+metrocard,transportation, 150,5
+metrocard,transportation, 150,5
+metrocard,transportation, 150,5
+gift,other,100,5
+gym,personal, 50,3
+gym,personal, 50,6
+gym,personal, 50,9
+gym,personal, 50,12

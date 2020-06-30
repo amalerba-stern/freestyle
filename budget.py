@@ -1,7 +1,6 @@
-# Budget
+# Spend tracker
 # Alex Malerba (afm433)
 
-import os
 import pandas
 import plotly
 import plotly.graph_objs as go
@@ -20,7 +19,7 @@ def to_usd(my_price):
 while True:
     input_method = input("What is your input method? ('csv' or 'manual'):")
     if input_method == "csv":
-        data = pandas.read_csv("budget.csv", engine='python')
+        data = pandas.read_csv("my_spend.csv", engine='python')
         data["price"] = [float(p) for p in data["price"]]
         break
     elif input_method == "manual":
@@ -98,7 +97,7 @@ layout = go.Layout(title = f"Spending by Month",
 
 plotly.offline.plot({"data": line, 
                      "layout": layout},
-                    filename = "monthly_sales_over_time.html",
+                    filename = "spending_by_month.html",
                     auto_open = True)
 
 # Pie chart showing spend by category
@@ -141,6 +140,7 @@ print("GENERATING PIE CHART...")
 
 labels = [pie_data["category"] for pie_data in pie_data]
 values = [pie_data["spend_pct"] for pie_data in pie_data]
-
-trace = go.Pie(labels=labels, values=values)
-plotly.offline.plot([trace], filename="pie_chart.html", auto_open=True)
+trace = go.Pie(labels=labels, values=values)#, title="Spending by Category")
+layout_pie = go.Layout(title = "Spending by Category")
+plotly.offline.plot({"data": trace, 
+                     "layout": layout_pie}, filename="spending_by_category.html", auto_open=True)
