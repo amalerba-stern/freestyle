@@ -6,7 +6,6 @@ from flask import Flask
 
 from web_app.routes.home_routes import home_routes
 from web_app.routes.weather_routes import weather_routes
-from web_app.routes.budget_routes import budget_routes
 
 load_dotenv()
 
@@ -18,7 +17,6 @@ def create_app():
 
     app.register_blueprint(home_routes)
     app.register_blueprint(weather_routes)
-    app.register_blueprint(budget_routes)
 
     return app
 
