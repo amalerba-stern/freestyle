@@ -1,0 +1,18 @@
+item,category,price,month
+banana,food,2,1
+rent,housing, 1200,1
+rent,housing, 1200,2
+rent,housing, 1200,3
+rent,housing, 1200,4
+rent,housing, 1250,5
+rent,housing, 1250,6
+rent,housing, 1250,7
+rent,housing, 1250,8
+rent,housing, 1250,9
+rent,housing, 1250,10
+rent,housing, 1250,11
+rent,housing, 1250,12
+dinner,food, 40,5
+metrocard,transportation, 150,5
+gift,other, 150,5
+gym,personal, 50,5
